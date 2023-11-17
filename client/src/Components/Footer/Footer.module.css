@@ -1,0 +1,33 @@
+
+@import './public/css/font-awesome.css';
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300italic);
+@import url(//fonts.googleapis.com/css?family=Economica);
+@import url(//fonts.googleapis.com/css?family=Marvel:400);
+@import url(//fonts.googleapis.com/css?family=Marvel:700);
+
+
+  .grid_12 {
+    display:inline;
+    float: left;
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+
+.container_12 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+}
+.container_12 .grid_12 {
+    width:1170px;
+  }
+  .clear {
+    float: none !important;
+    clear: both;
+}
+

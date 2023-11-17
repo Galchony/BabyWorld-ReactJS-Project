@@ -1,0 +1,41 @@
+  
+  /* Full-width inputs */
+input[type=text]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  .buttons {
+    background-color: #2e3548;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+ 
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+
+   /* Add padding to containers */
+   .container {
+    padding: 16px;
+    float: center;
+    text-align: center;
+
+  }
+  .title {
+    color: white;
+    display: block;
+    float: center;
+    text-align: center;
+  }

@@ -1,0 +1,113 @@
+#register-page {
+  display: inline-flex;
+  float: center;
+  position: relative;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #343a40;
+  box-shadow: 12px 12px 32px 12px #424446, -14px -14px 20px #343941;
+}
+
+.container {
+  padding: 40px;
+}
+
+.brand-logo {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+}
+
+.container>h1 {
+  margin-top: 15px;
+  font-weight: 900;
+  font-size: 2.7rem;
+  text-align: center;
+  letter-spacing: 1px;
+  font-family:sans-serif;
+  margin-bottom: 17px;
+}
+
+label,
+input {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 8px;
+  font-size: 27px;
+  color: white;
+  margin-top: 13px;
+  font-family:sans-serif;
+}
+
+label:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+input::placeholder {
+  color: rgba(184, 179, 179, 0.678);
+}
+
+
+input[type="password"],
+input[type="email"] {
+  background: #ecf0f3;
+  padding: 30px;
+  padding-left: 20px;
+  height: 50px;
+  width: auto;
+  margin-top: 10px;
+  font-size: 24px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
+}
+
+
+
+.btn {
+  margin-top: 30px;
+  margin-left: 15%;
+  background: #353738;
+  height: 60px;
+  width: 70%;
+  border-radius: 20px;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #27292a;
+}
+
+.container {
+  text-align: left;
+  margin-top: 20px;
+  width: fit-content;
+
+}
+
+.login-section { 
+  margin-top: 80px;
+  margin-left: 20%;
+  margin-right: 10%;
+  margin-bottom: 80px;
+  border-width: 0cap;
+  width: fit-content;
+}

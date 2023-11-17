@@ -1,0 +1,119 @@
+@import '/public/css/grid.css';
+@import '/public/css/font-awesome.css';
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300italic);
+@import url(//fonts.googleapis.com/css?family=Economica);
+@import url(//fonts.googleapis.com/css?family=Marvel:400);
+@import url(//fonts.googleapis.com/css?family=Marvel:700);
+
+.grid_12 {
+    display:inline;
+    float: left;
+    position: relative;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+
+.container_12 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+}
+.container_12 .grid_12 {
+    width:1170px;
+  }
+
+.clear {
+    float: none !important;
+    clear: both;
+}
+header {
+    color: #ffffff;
+    display: block;
+    position: relative;
+    z-index: 999;
+    padding: 18px 0 28px;
+  }
+  header .rel {
+    z-index: 999;
+  }
+/****Text styles****/
+.text1 {
+    color: #1e2439;
+    font-size: 30px;
+    line-height: 52px;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+  .text1.tx__1 {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 21px;
+  }
+  .text1.tx__1:after {
+    position: absolute;
+    content: '';
+    background-color: #5c627c;
+    width: 135px;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+  }
+  .text1.tx__2 {
+    margin-bottom: 11px;
+  }
+  .color1 {
+    color: #ec9e9e;
+  }
+  .color1 a:hover,
+  a.color1:hover {
+    color: #1e2439;
+  }
+  .color2 {
+    color: #1e2439;
+  }
+  .white {
+    color: #ffffff;
+  }
+  /****Map****/
+  .map {
+    overflow: hidden;
+    padding-top: 14px;
+  }
+  .map figure {
+    position: relative;
+    display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 45px;
+  }
+  .map figure iframe {
+    width: 100%;
+    height: 399px;
+    max-width: 100%;
+  }
+  .address1 {
+    display: block;
+    float: left;
+  }
+  .address1 + .address1 {
+    margin-left: 70px;
+  }
+  .address1 dt {
+    margin-bottom: 13px;
+  }
+  .address1 dd span {
+    min-width: 144px;
+    display: inline-block;
+    text-align: left;
+  }
+  .address1 dd span.col1 {
+    min-width: 0;
+  }
+
+  

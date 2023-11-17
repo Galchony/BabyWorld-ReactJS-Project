@@ -1,2 +1,2 @@
 # BabyWorld-ReactJS-Project
-Softuni Course Project 
+Web application (Single Page Application) using React.js

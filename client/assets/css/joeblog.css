@@ -11613,7 +11613,7 @@ textarea.form-control {
   position: relative;
   background: url(../imgs/header.jpg) no-repeat center top fixed;
   background-size: cover;
-  height: 800px;
+  height: 900px;
 }
 
 @media (max-width: 767.98px) {

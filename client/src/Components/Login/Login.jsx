@@ -17,16 +17,20 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <section id={styles["login-page"]} className={styles["login-section"]}>
-      <img src="/assets/imgs/log.jpg" alt="" />
-      <form id={styles["login"]} onSubmit={onClick}>
+    <section id={styles["login-page"]}>
+      <img
+        className={styles["img"]}
+        src="/assets/imgs/log.jpg"
+        alt="loginImg"
+      />
+      <form onSubmit={onClick}>
         <div className={styles["container"]}>
           <div className={styles["brand-logo"]}></div>
-          <h1>Login</h1>
+          <h1>Account Login</h1>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="email"
+            id="emails"
             name="email"
             value={values.email}
             onChange={onChangeHandler}
@@ -36,17 +40,19 @@ export default function Login({ onLogin }) {
           <label htmlFor="login-pass">Password:</label>
           <input
             type="password"
-            id="password"
+            id="passwords"
             name="password"
             value={values.password}
             onChange={onChangeHandler}
             placeholder="*********"
           />
-          <input type="submit" className={styles["btn"]} value="Login" />
+          <button type="submit" className={styles["btn"]}>
+            Login
+          </button>
         </div>
+        <hr />
         <span>
-          {" "}
-          Go to <a href="/register">register</a>!
+          Don't have an account? <a href="/register">Register</a> here!
         </span>
       </form>
     </section>

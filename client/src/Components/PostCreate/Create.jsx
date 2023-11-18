@@ -28,7 +28,7 @@ export default function Create() {
   };
 
   return (
-    <section id="create">
+    <section id={styles["create-post"]}>
       <form method="POST" onSubmit={onClickHandler}>
         <div className={styles.container}>
           <h1>Create Your Post Here</h1>

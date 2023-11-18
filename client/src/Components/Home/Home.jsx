@@ -30,7 +30,12 @@ export default function Home() {
       <div id="wrapper">
         <header className="page-header"></header>
         <div className={styles.typewriter}>
-          <h1>Welcome to Baby World! </h1>
+          <h1>Welcome to Baby World!</h1>
+        </div>
+
+        <div className={styles["typewriter-1"]}>
+          <h1>“The future depends on what we do  in the present!”</h1>
+          
         </div>
       </div>
     </>

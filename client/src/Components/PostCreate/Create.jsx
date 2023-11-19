@@ -1,35 +1,28 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
-import * as postService from "../../services/postService";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from "../../hooks/useForm";
 
 import styles from "./Create.module.css";
 
 export default function Create() {
-  const navigate = useNavigate();
+  const { userEmail, onCreateSubmit } = useContext(AuthContext);
 
-  const [values, setValues] = useState({
-    title: "",
-    category: "",
-    imageUrl: "",
-    author: sessionStorage.getItem("token"),
-    createdAt: new Date(),
-    description: "",
-  });
-
-  const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
-  };
-
-  const onClickHandler = (e) => {
-    e.preventDefault();
-    postService.create(values).catch((err) => console.log(err));
-    navigate("/catalog");
-  };
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      title: "",
+      category: "",
+      imageUrl: "",
+      author: userEmail,
+      createdAt: new Date(),
+      description: "",
+    },
+    onCreateSubmit
+  );
 
   return (
     <section id={styles["create-post"]}>
-      <form method="POST" onSubmit={onClickHandler}>
+      <form method="POST" onSubmit={onSubmit}>
         <div className={styles.container}>
           <h1>Create Your Post Here</h1>
 
@@ -38,7 +31,7 @@ export default function Create() {
             type="text"
             placeholder="Title"
             name="title"
-            onChange={onChangeHandler}
+            onChange={changeHandler}
             value={values.title}
           />
           <label htmlFor="category">Category</label>
@@ -46,7 +39,7 @@ export default function Create() {
             type="text"
             placeholder="Category"
             name="category"
-            onChange={onChangeHandler}
+            onChange={changeHandler}
             value={values.category}
           />
           <label htmlFor="imageUrl">Image</label>
@@ -54,7 +47,7 @@ export default function Create() {
             type="text"
             name="imageUrl"
             placeholder="Image"
-            onChange={onChangeHandler}
+            onChange={changeHandler}
             value={values.imageUrl}
           />
           <label htmlFor="description">Description</label>
@@ -63,12 +56,14 @@ export default function Create() {
               type="text"
               name="description"
               placeholder="Description"
-              onChange={onChangeHandler}
+              onChange={changeHandler}
               value={values.description}
             />
           </div>
 
-          <button className={styles.btn} type="submit">Create Post</button>
+          <button className={styles.btn} type="submit">
+            Create Post
+          </button>
         </div>
       </form>
     </section>

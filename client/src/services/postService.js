@@ -14,7 +14,7 @@ export const getOne = async (postId) => {
   return result;
 };
 
-export const create = async (data) => {
+export const create = async (data, token) => {
   const body = {
     title: data.title,
     category: data.category,
@@ -23,7 +23,6 @@ export const create = async (data) => {
     createdAt: data.createdAt,
     description: data.description,
   };
-  const token = sessionStorage.getItem("token");
   const response = await fetch(baseUrl, {
     method: "POST",
     headers: {
@@ -37,8 +36,7 @@ export const create = async (data) => {
   return result;
 };
 
-export const remove = async (postId) => {
-  const token = sessionStorage.getItem("token");
+export const remove = async (postId, token) => {
   await fetch(`${baseUrl}/${postId}`, {
     headers: {
       "X-Authorization": token,

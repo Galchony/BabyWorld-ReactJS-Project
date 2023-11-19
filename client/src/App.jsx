@@ -1,6 +1,8 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import * as authService from "./services/authService";
+import * as postService from "./services/postService";
+
 import { AuthContext } from "./contexts/AuthContext";
 
 import Header from "./components/Header/Header";
@@ -24,7 +26,7 @@ export default function App() {
     try {
       const result = await authService.login(data);
       setAuth(result);
-      navigate("/");
+      navigate("/catalog");
     } catch (error) {
       console.log(error);
     }
@@ -34,24 +36,48 @@ export default function App() {
       const { repeatPassword, ...registerData } = data;
       const result = await authService.register(registerData);
       setAuth(result);
+      navigate("/catalog");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onLogout = async () => {
+    try {
+      await authService.logout();
+      setAuth({});
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onLogout = () => {
-    authService.logout().catch((err) => console.log(err));
-    setAuth({});
+  const onCreateSubmit = async (values) => {
+    try {
+      await postService.create(values, auth.accessToken);
+      navigate("/catalog");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const onDelete = async (postId) => {
+    try {
+      await postService.remove(postId, auth.accessToken);
+      navigate("/catalog");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const context = {
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
+    onCreateSubmit,
+    onDelete,
     userId: auth._id,
-    token: auth?.accessToken,
+    token: auth.accessToken,
     userEmail: auth.email,
     isAuthenticated: !!auth.accessToken,
   };

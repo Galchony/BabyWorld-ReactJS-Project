@@ -1,6 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 
-import * as userService from "./services/userService";
+import * as authService from "./services/authService";
+import { AuthContext } from "./contexts/AuthContext";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -11,47 +12,68 @@ import Create from "./components/PostCreate/Create";
 import Details from "./components/PostDetails/Details";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import Logout from "./components/Logout";
+import Logout from "./Components/Logout/Logout";
+import { useState } from "react";
 
 export default function App() {
   const navigate = useNavigate();
 
-  const onLoginClickHandler = (userData) => {
-    userService.login(userData).catch((err) => console.log(err));
-    navigate("/");
+  const [auth, setAuth] = useState({});
+
+  const onLoginSubmit = async (data) => {
+    try {
+      const result = await authService.login(data);
+      setAuth(result);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const onRegisterSubmit = async (data) => {
+    try {
+      const { repeatPassword, ...registerData } = data;
+      const result = await authService.register(registerData);
+      setAuth(result);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const onLogoutClickHandler = () => {
-    userService.logout().catch((err) => console.log(err));
-    navigate("/");
+  const onLogout = () => {
+    authService.logout().catch((err) => console.log(err));
+    setAuth({});
+
+  };
+
+  const context = {
+    onLoginSubmit,
+    onRegisterSubmit,
+    onLogout,
+    userId: auth._id,
+    token: auth?.accessToken,
+    userEmail: auth.email,
+    isAuthenticated: !!auth.accessToken,
   };
 
   return (
-    <>
+    <AuthContext.Provider value={context}>
       <div>
         <Header />
       </div>
-      <main >
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create" element={<Create />} />
           <Route path="/postDetails/:postId" element={<Details />} />
-          <Route
-            path="/login"
-            element={<Login onLogin={onLoginClickHandler} />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/logout"
-            element={
-              <Logout onClick={onLogoutClickHandler} navigate={navigate} />
-            }
-          />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </main>
       <Footer />
-    </>
+    </AuthContext.Provider>
   );
 }

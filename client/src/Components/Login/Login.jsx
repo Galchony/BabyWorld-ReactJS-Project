@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
+
+import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from "../../hooks/useForm";
+
 import styles from "./Login.module.css";
+import { Link } from "react-router-dom";
 
-export default function Login({ onLogin }) {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-
-  const onChangeHandler = (e) => {
-    setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
-  };
-
-  const onClick = (e) => {
-    e.preventDefault();
-    onLogin(values);
-  };
+export default function Login() {
+  const { onLoginSubmit } = useContext(AuthContext);
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    onLoginSubmit
+  );
 
   return (
     <section id={styles["login-page"]}>
@@ -23,36 +23,36 @@ export default function Login({ onLogin }) {
         src="/assets/imgs/log.jpg"
         alt="loginImg"
       />
-      <form onSubmit={onClick}>
+      <form onSubmit={onSubmit}>
         <div className={styles["container"]}>
-          <div className={styles["brand-logo"]}></div>
+          <div className={styles["icon"]}></div>
           <h1>Account Login</h1>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="emails"
             name="email"
+            onChange={changeHandler}
             value={values.email}
-            onChange={onChangeHandler}
             placeholder="exapmle@gmail.com"
           />
 
-          <label htmlFor="login-pass">Password:</label>
+          <label htmlFor="pass">Password:</label>
           <input
             type="password"
             id="passwords"
             name="password"
+            onChange={changeHandler}
             value={values.password}
-            onChange={onChangeHandler}
             placeholder="*********"
           />
           <button type="submit" className={styles["btn"]}>
             Login
           </button>
-        </div>
+        </div>  
         <hr />
         <span>
-          Don't have an account? <a href="/register">Register</a> here!
+          Don't have an account? <Link to="/register">Register</Link> here!
         </span>
       </form>
     </section>

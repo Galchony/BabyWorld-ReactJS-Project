@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 
+import { AuthContext } from "../../contexts/AuthContext";
 import * as postService from "../../services/postService";
 
 import styles from "./Details.module.css";
 
 export default function Details() {
-  const navigate = useNavigate();
   const [post, setPost] = useState({});
   const { postId } = useParams();
+  const { onDelete } = useContext(AuthContext);
 
   useEffect(() => {
-    postService.getOne(postId).then((result) => setPost(result)).catch(err=>console.log(err));
+    postService
+      .getOne(postId)
+      .then((result) => setPost(result))
+      .catch((err) => console.log(err));
   }, [postId]);
 
-  const onDeleteHandler = async () => {
-    await postService.remove(post._id).catch(err=>console.log(err));
-    navigate("/catalog");
+  const onDeleteHandler = () => {
+    onDelete(postId)
   };
 
   return (

@@ -8,8 +8,10 @@ import styles from "./Details.module.css";
 
 export default function Details({ postId, onClose }) {
   const [post, setPost] = useState({});
+  const [username, setUsername] = useState("");
+  const [comment, setComment] = useState("");
   // const { postId } = useParams();
-  const { onDelete, userId } = useContext(AuthContext);
+  const { onDelete, userId, token } = useContext(AuthContext);
 
   useEffect(() => {
     postService
@@ -24,13 +26,33 @@ export default function Details({ postId, onClose }) {
     onDelete(postId);
   };
 
+  const onCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    const result = await postService.addComment(
+      gameId,
+      {
+        username,
+        comment,
+      },
+      token
+    );
+
+    setPost((state) => ({
+      ...state,
+      comments: { ...state.comments, [result._id]: result },
+    }));
+    setUsername("");
+    setComment("");
+  };
+
   return (
     <div className={styles["overlay"]}>
       <div className={styles["backdrop"]} onClick={onClose}></div>
       <div className={styles["modal"]}>
         <div className={styles["detail-container"]}>
           <header className={styles["headers"]}>
-            <h2>Post Detail</h2>
+            <h2>{post.title}</h2>
             <button className={styles["btn close"]} onClick={onClose}>
               <svg
                 aria-hidden="true"
@@ -59,34 +81,76 @@ export default function Details({ postId, onClose }) {
             </div>
             <div className={styles["user-details"]}>
               <h3>
-                <strong>{post.title}</strong>
+                <strong></strong>
               </h3>
               <p>
-                Category <strong>{post.category}</strong>
+                Category: <strong>{post.category}</strong>
               </p>
               <p>
-                
+                <strong>{post.author}</strong>
+              </p>
+              <p>
                 <strong> {post.description} </strong>
               </p>
-             
-              <p>
-                Phone Number: <strong>{post.title}</strong>
-              </p>
 
-              {isOwner && (
-                <div className={styles.container}>
-                  <button type="button" className={styles.btn}>
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.btn}
-                    onClick={onDeleteHandler}
-                  >
-                    Delete
-                  </button>
+              <div className={styles.container}>
+                {isOwner && (
+                  <>
+                    <button type="button" className={styles.btn}>
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.btn}
+                      onClick={onDeleteHandler}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+
+                <div className="details-comments">
+                  <h2>Comments:</h2>
+                  <ul>
+                    {post.comments &&
+                      Object.values(post.comments).map((x) => (
+                        <li key={x._id} className="comment">
+                          <p>
+                            {x.username}: {x.comment}
+                          </p>
+                        </li>
+                      ))}
+                  </ul>
+
+                  {/* {!Object.values(game.comments).length && (
+                        <p className="no-comment">No comments.</p>
+                    )} */}
                 </div>
-              )}
+
+                <article className="create-comment">
+                  <label>Add new comment:</label>
+                  <form className="form" onSubmit={onCommentSubmit}>
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <textarea
+                      name="comment"
+                      placeholder="Comment......"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    ></textarea>
+                    <input
+                      className={styles.btn}
+                      type="submit"
+                      value="Add Comment"
+                    />
+                  </form>
+                </article>
+              </div>
             </div>
           </div>
         </div>

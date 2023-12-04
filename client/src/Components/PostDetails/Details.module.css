@@ -16,7 +16,6 @@
     margin: 8px 8px;
     border: none;
     cursor: pointer;
-    width: 10%;
 
   }
 
@@ -53,10 +52,7 @@
   .modal {
     display: flex;
     position: absolute;
-    top: 100px;
-    right: 600px;
-    width: 200px;
-    height: 500px;
+    top: 200px;
     margin: auto;
     border-radius: 20px;
     background-color: #343a40;
@@ -67,9 +63,10 @@
 
   @media (min-width: 930px) {
     .modal {
-      width: 45rem;
-      left: calc(50% - 20rem);
-      border-radius: 14px;
+      width: 80rem;
+      height: 50rem;
+      left: calc(35% - 20rem);
+      border-radius: 20px;
     }
   }
 
@@ -226,15 +223,14 @@
 
   .container {
     align-self: center;
-    width: 300px;
+    width: 400px;
   }
 
   .btn {
-    margin-top: 50px;
     margin-left: 15%;
     background: #353738;
     height: 50px;
-    width: 50%;
+    width: 80%;
     border-radius: 20px;
     color: white;
     font-size: 15px;

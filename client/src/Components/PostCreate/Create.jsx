@@ -6,14 +6,14 @@ import { useForm } from "../../hooks/useForm";
 import styles from "./Create.module.css";
 
 export default function Create() {
-  const { userEmail, onCreateSubmit } = useContext(AuthContext);
+  const { username, onCreateSubmit } = useContext(AuthContext);
 
   const { values, changeHandler, onSubmit } = useForm(
     {
       title: "",
       category: "",
       imageUrl: "",
-      author: userEmail,
+      author: username,
       createdAt: new Date(),
       description: "",
     },

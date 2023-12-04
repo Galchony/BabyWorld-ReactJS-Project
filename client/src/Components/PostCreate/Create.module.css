@@ -1,110 +1,111 @@
 #create-post {
-    all: unset;
-    display: inline-flex;
-    justify-content: space-around;
-    width: 60%;
-    height: 70%;
-    padding: 40px;
-    border-radius: 20px;
-    box-sizing: border-box;
-    background: #343a40;
-    box-shadow: 12px 12px 32px 12px #424446, -14px -14px 20px #343941;
-    margin-top: 80px;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 80px;
-  }
- 
-  .container {
-    align-self: center;
-    width: 600px;
-    
-  }
-  
- 
-  label {
-    margin-bottom: 8px;
-    font-size: 25px;
-    color: white;
-    margin-top: 50px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    display: block;
-  }
-  
-  label:nth-of-type(2) {
-    margin-top: 20px;
-  }
-  
-  input {
-    all: unset;
-    display: block;
-    width: 100%;
-    height: 30px;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    background: #ecf0f3;
-    padding: 25px;
-    margin-top: 10px;
-    font-size: 18px;
-    border-radius: 20px;
-    box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
-  }
-  
-  input::placeholder {
-    color: rgba(184, 179, 179, 0.678);
-  }
-  textarea {
-    display: block;
-    width: 100%;
-    height: 10px;
-    border: none;
-    outline: none;
-    box-sizing: border-box;
-    background: #ecf0f3;
-    padding: 25px;
-    margin-top: 10px;
-    font-size: 18px;
-    border-radius: 20px;
-    box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
-  }
-  
-  .btn {
-    margin-top: 50px;
-    margin-left: 15%;
-    background: #353738;
-    height: 50px;
-    width: 70%;
-    border-radius: 20px;
-    color: white;
-    font-size: 23px;
-    cursor: pointer;
-    font-weight: 900;
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
-    transition: 0.5s;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  
-  }
-  
-  .btn:hover {
-    color: white;
-    background-color: #27292a;
-  }
-  
-  
-  span {
-    margin-left: 10px;
-    color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 18px;
-  
-  }
-  
-  a {
-    color: rgb(124, 117, 117);
-  
-  }
-  
-  a:hover {
-    color: rgb(233, 224, 224);
-  }
+  all: unset;
+  display: inline-flex;
+  justify-content: space-around;
+  width: 60%;
+  height: 70%;
+  padding: 40px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  background: #343a40;
+  box-shadow: 12px 12px 32px 12px #424446, -14px -14px 20px #343941;
+  margin-top: 80px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 80px;
+}
+
+.container {
+  align-self: center;
+  width: 600px;
+
+}
+
+
+label {
+  margin-bottom: 8px;
+  font-size: 25px;
+  color: white;
+  margin-top: 30px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: block;
+}
+
+input {
+  all: unset;
+  display: block;
+  width: 100%;
+  height: 30px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  padding: 20px;
+  margin-top: 5px;
+  font-size: 18px;
+  border-radius: 20px;
+  box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
+}
+
+input::placeholder {
+  color: rgba(184, 179, 179, 0.678);
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  padding: 25px;
+  margin-top: 10px;
+  font-size: 18px;
+  border-radius: 20px;
+  box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
+}
+
+textarea::placeholder {
+  color: rgba(184, 179, 179, 0.678);
+}
+
+.btn {
+  margin-top: 50px;
+  margin-left: 15%;
+  background: #353738;
+  height: 50px;
+  width: 70%;
+  border-radius: 20px;
+  color: white;
+  font-size: 23px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+.btn:hover {
+  color: white;
+  background-color: #27292a;
+}
+
+
+span {
+  margin-left: 10px;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 18px;
+
+}
+
+a {
+  color: rgb(124, 117, 117);
+
+}
+
+a:hover {
+  color: rgb(233, 224, 224);
+}

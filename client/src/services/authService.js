@@ -10,7 +10,7 @@ export const login = async (userData) => {
   });
   const data = await response.json();
 
-  // sessionStorage.setItem("token", data.accessToken);
+  localStorage.setItem("token", data.accessToken);
   return data;
 };
 
@@ -24,11 +24,11 @@ export const register = async (userData) => {
   });
   const data = await response.json();
 
-  // sessionStorage.setItem("token", token);
+  localStorage.setItem("token", data.accessToken);
   return data;
 };
 
 export const logout = async () => {
   await fetch(`${baseUrl}/logout`);
-  // sessionStorage.removeItem("token");
+  localStorage.removeItem("token");
 };

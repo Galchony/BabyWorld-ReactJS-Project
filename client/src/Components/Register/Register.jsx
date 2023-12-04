@@ -9,6 +9,7 @@ export default function Register() {
   const { values, changeHandler, onSubmit } = useForm(
     {
       email: "",
+      username: "",
       password: "",
       repeatPassword:"",
     },

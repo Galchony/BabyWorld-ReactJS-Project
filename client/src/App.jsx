@@ -80,7 +80,7 @@ export default function App() {
     onDelete,
     userId: auth._id,
     token: auth.accessToken,
-    userEmail: auth.email,
+    username: auth.username,
     isAuthenticated: !!auth.accessToken,
   };
 

@@ -56,7 +56,7 @@ export default function Register() {
             id="repeatPassword"
             name="repeatPassword"
             onChange={changeHandler}
-            value={values.password}
+            value={values.repeatPassword}
             placeholder="*********"
           />
           <button type="submit" className={styles["btn"]}>

@@ -19,13 +19,16 @@ import Logout from "./Components/Logout/Logout";
 export default function App() {
   const navigate = useNavigate();
 
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(() => {
+    localStorage.removeItem("token");
+    return {};
+  });
 
   const onLoginSubmit = async (data) => {
     try {
       const result = await authService.login(data);
       setAuth(result);
-      navigate("/catalog");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +38,7 @@ export default function App() {
       const { repeatPassword, ...registerData } = data;
       const result = await authService.register(registerData);
       setAuth(result);
-      navigate("/catalog");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +71,6 @@ export default function App() {
       console.log(error);
     }
   };
-
 
   const context = {
     onLoginSubmit,

@@ -7,7 +7,7 @@ export default function Logout() {
   const { onLogout } = useContext(AuthContext);
   useEffect(() => {
     onLogout();
-  }, [onLogout]);
+  }, []);
 
   return null;
 }

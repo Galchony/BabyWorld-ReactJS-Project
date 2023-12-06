@@ -1,9 +1,6 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import * as authService from "./services/authService";
-import * as postService from "./services/postService";
-
-import { AuthContext, AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -16,9 +13,6 @@ import Register from "./components/Register/Register";
 import Logout from "./Components/Logout/Logout";
 
 export default function App() {
-  
-
-
   return (
     <AuthProvider>
       <div>

@@ -1,50 +1,71 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useReducer, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 import { AuthContext } from "../../contexts/AuthContext";
 import * as postService from "../../services/postService";
+import * as commentService from "../../services/commentService";
+import reducer from "./commentReducer.js";
+import { useForm } from "../../hooks/useForm";
 
 import styles from "./Details.module.css";
 
 export default function Details({ postId, onClose }) {
   const [post, setPost] = useState({});
-  const [username, setUsername] = useState("");
-  const [comment, setComment] = useState("");
-  // const { postId } = useParams();
-  const { onDelete, userId, token } = useContext(AuthContext);
+  const [comments, dispatch] = useReducer(reducer, []);
+  const { userId, username, token } = useContext(AuthContext);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     postService
       .getOne(postId)
       .then((result) => setPost(result))
       .catch((err) => console.log(err));
+
+    commentService.getAll(postId).then((result) => {
+      dispatch({
+        type: "GET_ALL_COMMENTS",
+        payload: result,
+      });
+    });
   }, [postId]);
 
   const isOwner = post._ownerId == userId;
 
-  const onDeleteHandler = () => {
-    onDelete(postId);
+  const onDelete = async () => {
+    try {
+      const hasConfirmed = confirm(`Are you sure you want to delete ${post.title}`);
+      if (hasConfirmed) {
+      await postService.remove(postId, token);
+      navigate("/catalog");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const onCommentSubmit = async (e) => {
-    e.preventDefault();
-
-    const result = await postService.addComment(
-      gameId,
-      {
-        username,
-        comment,
-      },
+  const addCommentHandler = async (values) => {
+    const newComment = await commentService.create(
+      postId,
+      values.comment,
       token
     );
 
-    setPost((state) => ({
-      ...state,
-      comments: { ...state.comments, [result._id]: result },
-    }));
-    setUsername("");
-    setComment("");
+    newComment.owner = { username };
+
+    dispatch({
+      type: "ADD_COMMENT",
+      payload: newComment,
+    });
   };
+
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      comment: "",
+    },
+    addCommentHandler
+  );
 
   return (
     <div className={styles["overlay"]}>
@@ -92,67 +113,48 @@ export default function Details({ postId, onClose }) {
               <p>
                 <strong> {post.description} </strong>
               </p>
-
-              <div className={styles.container}>
-                {isOwner && (
-                  <>
-                    <button type="button" className={styles.btn}>
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.btn}
-                      onClick={onDeleteHandler}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-
-                <div className="details-comments">
-                  <h2>Comments:</h2>
-                  <ul>
-                    {post.comments &&
-                      Object.values(post.comments).map((x) => (
-                        <li key={x._id} className="comment">
-                          <p>
-                            {x.username}: {x.comment}
-                          </p>
-                        </li>
-                      ))}
-                  </ul>
-
-                  {/* {!Object.values(game.comments).length && (
-                        <p className="no-comment">No comments.</p>
-                    )} */}
-                </div>
-
-                <article className="create-comment">
-                  <label>Add new comment:</label>
-                  <form className="form" onSubmit={onCommentSubmit}>
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <textarea
-                      name="comment"
-                      placeholder="Comment......"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    ></textarea>
-                    <input
-                      className={styles.btn}
-                      type="submit"
-                      value="Add Comment"
-                    />
-                  </form>
-                </article>
-              </div>
             </div>
           </div>
+          <div className={styles.container}>
+            {isOwner && (
+              <>
+                <button type="button" className={styles.btn}>
+                  Edit
+                </button>
+                <button type="button" className={styles.btn} onClick={onDelete}>
+                  Delete
+                </button>
+              </>
+            )}
+          </div>
+          <div className="details-comments">
+            <h2>Comments:</h2>
+            <ul>
+              {comments.map(({ _id, text, owner: { username } }) => (
+                <li key={_id} className="comment">
+                  <p>
+                    {username}: {text}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            {comments.length === 0 && (
+              <p className="no-comment">No comments.</p>
+            )}
+          </div>
+          <article className="create-comment">
+            <label>Add new comment:</label>
+            <form className="form" onSubmit={onSubmit}>
+              <textarea
+                name="comment"
+                onChange={changeHandler}
+                value={values.comment}
+                placeholder="Comment......"
+              ></textarea>
+              <input className="btn submit" type="submit" value="Add Comment" />
+            </form>
+          </article>
         </div>
       </div>
     </div>

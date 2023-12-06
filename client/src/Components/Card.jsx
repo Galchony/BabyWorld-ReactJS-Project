@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 import styles from "./Card.module.css";
+import { formatDate } from "../utils/dataUtils";
+
 
 export default function Card({
   _id,
@@ -28,7 +30,7 @@ export default function Card({
           <h6 className="card-title mb-2">Category: {category}</h6>
           <h6 className="card-title mb-2">Created by: {author}</h6>
           <small className="small text-muted">
-            {createdAt}
+            {formatDate(createdAt)}
             <span className="px-2">-</span>
             <a href="#" className="text-muted">
               34 Comments

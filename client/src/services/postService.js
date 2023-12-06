@@ -46,16 +46,3 @@ export const remove = async (postId, token) => {
   });
 };
 
-export const addComment = async (postId, data, token) => {
-  const response = await fetch(`${baseUrl}/${postId}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Authorization": token,
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await response.json();
-
-  return result;
-};

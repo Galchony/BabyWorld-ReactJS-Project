@@ -3,21 +3,23 @@
   display: inline-flex;
   justify-content: space-around;
   width: 60%;
-  height: 70%;
+  height: 90%;
   padding: 40px;
   border-radius: 20px;
   box-sizing: border-box;
   background: #343a40;
   box-shadow: 12px 12px 32px 12px #424446, -14px -14px 20px #343941;
-  margin-top: 80px;
+  margin-top: 110px;
   margin-left: 20%;
   margin-right: 20%;
-  margin-bottom: 80px;
+  margin-bottom: 110px;
 }
-.img{
+
+.img {
   border-radius: 20px;
 
 }
+
 .container {
   align-self: center;
   width: 300px;

@@ -32,7 +32,7 @@ export default function Card({
           <small className="small text-muted">
             {formatDate(createdAt)}
             <span className="px-2">-</span>
-            <a href="#" className="text-muted">
+            <a  className="text-muted">
               34 Comments
             </a>
           </small>

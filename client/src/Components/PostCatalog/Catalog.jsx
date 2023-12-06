@@ -5,7 +5,6 @@ import * as postService from "../../services/postService";
 
 import Card from "../Card";
 import Details from "../PostDetails/Details";
-
 import styles from "./Catalog.module.css";
 
 export default function Catalog(props) {

@@ -1,12 +1,24 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
+import * as postService from "../../services/postService";
 
 import styles from "./Create.module.css";
 
 export default function Create() {
-  const { username, onCreateSubmit } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { username,token } = useContext(AuthContext);
+
+  const onCreateSubmit = async (values) => {
+    try {
+      await postService.create(values, token);
+      navigate("/catalog");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { values, changeHandler, onSubmit } = useForm(
     {

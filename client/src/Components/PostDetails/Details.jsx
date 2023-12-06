@@ -1,12 +1,11 @@
 import { useEffect, useState, useReducer, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-import { AuthContext } from "../../contexts/AuthContext";
+import reducer from "./commentReducer.js";
 import * as postService from "../../services/postService";
 import * as commentService from "../../services/commentService";
-import reducer from "./commentReducer.js";
 import { useForm } from "../../hooks/useForm";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import styles from "./Details.module.css";
 
@@ -15,7 +14,6 @@ export default function Details({ postId, onClose }) {
   const [comments, dispatch] = useReducer(reducer, []);
   const { userId, username, token } = useContext(AuthContext);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     postService
@@ -35,10 +33,12 @@ export default function Details({ postId, onClose }) {
 
   const onDelete = async () => {
     try {
-      const hasConfirmed = confirm(`Are you sure you want to delete ${post.title}`);
+      const hasConfirmed = confirm(
+        `Are you sure you want to delete ${post.title}`
+      );
       if (hasConfirmed) {
-      await postService.remove(postId, token);
-      navigate("/catalog");
+        await postService.remove(postId, token);
+        navigate("/catalog");
       }
     } catch (error) {
       console.log(error);
@@ -127,23 +127,31 @@ export default function Details({ postId, onClose }) {
               </>
             )}
           </div>
-          <div className="details-comments">
+          <div className={styles["details-comments"]}>
             <h2>Comments:</h2>
             <ul>
               {comments.map(({ _id, text, owner: { username } }) => (
-                <li key={_id} className="comment">
+                <li key={_id} className={styles["comment"]}>
                   <p>
                     {username}: {text}
+                    <button type="button" >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                    >
+                      Delete
+                    </button>
                   </p>
                 </li>
               ))}
             </ul>
 
             {comments.length === 0 && (
-              <p className="no-comment">No comments.</p>
+              <p className={styles["no-comment"]}>No comments.</p>
             )}
           </div>
-          <article className="create-comment">
+          <article className={styles["create-comment"]}>
             <label>Add new comment:</label>
             <form className="form" onSubmit={onSubmit}>
               <textarea
@@ -152,7 +160,7 @@ export default function Details({ postId, onClose }) {
                 value={values.comment}
                 placeholder="Comment......"
               ></textarea>
-              <input className="btn submit" type="submit" value="Add Comment" />
+              <input className={styles["btn submit"]} type="submit" value="Add Comment" />
             </form>
           </article>
         </div>

@@ -2,8 +2,8 @@
     all: unset;
     display: inline-flex;
     justify-content: space-around;
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     padding: 40px;
     border-radius: 20px;
     box-sizing: border-box;

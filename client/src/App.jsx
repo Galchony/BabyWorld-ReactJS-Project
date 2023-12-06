@@ -63,21 +63,13 @@ export default function App() {
     }
   };
 
-  const onDelete = async (postId) => {
-    try {
-      await postService.remove(postId, auth.accessToken);
-      navigate("/catalog");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   const context = {
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
     onCreateSubmit,
-    onDelete,
     userId: auth._id,
     token: auth.accessToken,
     username: auth.username,

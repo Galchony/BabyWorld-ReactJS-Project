@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import * as postService from "../../services/postService";
 
+
 import Card from "../Card";
 import Details from "../PostDetails/Details";
 
@@ -9,7 +10,6 @@ import styles from "./Catalog.module.css";
 
 export default function Catalog(props) {
   const [posts, setPosts] = useState([]);
-  const [isTherePost, setIsTherePost] = useState(false);
   const [postId, setPostId] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
 
@@ -55,8 +55,8 @@ export default function Catalog(props) {
             <div className="feature-post-caption"> Baby Loving </div>
           </a>
           <a href="single-post.html" className="feature-post-item">
-            <img src="/assets/imgs/icon3.png" className="w-100" alt="" />
-            <div className="feature-post-caption"> Baby Loving </div>
+            <img src="/assets/imgs/icon4.png" className="w-100" alt="" />
+            <div className="feature-post-caption"> All posts </div>
           </a>
         </div>
 
@@ -72,9 +72,9 @@ export default function Catalog(props) {
         ))}
         <hr />
       </div>
-      <button className="btn btn-primary btn-block my-4">
-        Load More Posts
-      </button>
+      {posts.length === 0 && (
+                <h3 className="no-articles">No posts yet</h3>
+            )}
     </div>
   );
 }

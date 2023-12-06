@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import * as authService from "./services/authService";
 import * as postService from "./services/postService";
 
-import { AuthContext } from "./contexts/AuthContext";
+import { AuthContext, AuthProvider } from "./contexts/AuthContext";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -17,67 +16,11 @@ import Register from "./components/Register/Register";
 import Logout from "./Components/Logout/Logout";
 
 export default function App() {
-  const navigate = useNavigate();
+  
 
-  const [auth, setAuth] = useState(() => {
-    localStorage.removeItem("token");
-    return {};
-  });
-
-  const onLoginSubmit = async (data) => {
-    try {
-      const result = await authService.login(data);
-      setAuth(result);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const onRegisterSubmit = async (data) => {
-    try {
-      const { repeatPassword, ...registerData } = data;
-      const result = await authService.register(registerData);
-      setAuth(result);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onLogout = async () => {
-    try {
-      await authService.logout();
-      setAuth({});
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onCreateSubmit = async (values) => {
-    try {
-      await postService.create(values, auth.accessToken);
-      navigate("/catalog");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-
-  const context = {
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    onCreateSubmit,
-    userId: auth._id,
-    token: auth.accessToken,
-    username: auth.username,
-    isAuthenticated: !!auth.accessToken,
-  };
 
   return (
-    <AuthContext.Provider value={context}>
+    <AuthProvider>
       <div>
         <Header />
       </div>
@@ -93,6 +36,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
